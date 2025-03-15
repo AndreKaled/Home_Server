@@ -31,10 +31,27 @@ Pronto, simples e rápido, você já pode instalar alguns aplicativos na App Sto
 
 ## Configurações pessoais
 Nessa seção conterá algumas configurações que defini no meu servidor, você pode fazer o mesmo ou alterar algum detalhe ou quem sabe fazer sua própria configuração e compartilhar ^-^
-### Configuração de SSH
-Fiz este com o auxílio do Github
-* Abra o Git Bash
-* Digite do painel o comando ``ssh-keygen -t ed25519 -C "email_bacanudo@email.bacanudo"``, insira o mesmo email que você tenha uma conta github
-* Siga os passos exibidos no painel e insira a sua frase-chave
-* Acesse o arquivo gerado, caminhando até o diretório do arquivo, abra-o e copie todo o conteúdo
-* Entre na Github Web, acesse a configuração da sua conta e registre a sua chave SSH, no campo ```key``, cole o conteúdo copiado do arquivo.
+
+### Conexão via SSH
+Para conectar-se a um servidor Ubuntu via SSH, você precisa:
+* Ter acesso ao servidor: Você precisa do endereço IP do servidor, além de um usuário e senha (ou uma chave SSH) para autenticação.
+* Usar o comando SSH: No terminal, use o comando:
+```bash
+ssh usuario@ip_servidor
+```
+* Autenticação:
+1. Senha: Se o servidor estiver configurado para aceitar autenticação por senha, você será solicitado a inserir a senha do usuário.
+2. Chave SSH: Se preferir usar uma chave SSH para autenticação, você precisará:
+---
+1. Gerar uma chave SSH no seu computador (se ainda não tiver uma):
+```bash
+ssh-keygen -t ed25519 -C "seu_email@exemplo.com"
+```
+2. Copiar a chave pública para o servidor:
+```bash
+ssh-copy-id usuario@ip_do_servidor
+```
+Isso adicionará sua chave pública ao arquivo `~/.ssh/authorized_keys` no servidor, permitindo que você se conecte sem digitar a senha.
+
+---
+### Configurar pasta compartilhada
