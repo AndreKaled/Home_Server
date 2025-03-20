@@ -55,5 +55,7 @@ Isso adicionará sua chave pública ao arquivo `~/.ssh/authorized_keys` no servi
 
 ---
 ### Configurar pasta compartilhada
+
 Tive trabalho para encontrar uma solução que funcionava, a solução da CasaOS implementava um compartilhamento de pasta, mas a pasta deveria se localizar como subpasta de ```/home/```, o que não queria, visto que preparei uma partição especial com 160GB para armazenar dados. Uma solução que funcionou para mim foi:
-- 
+
+-
