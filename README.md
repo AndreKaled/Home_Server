@@ -57,5 +57,75 @@ Isso adicionará sua chave pública ao arquivo `~/.ssh/authorized_keys` no servi
 ### Configurar pasta compartilhada
 
 Tive trabalho para encontrar uma solução que funcionava, a solução da CasaOS implementava um compartilhamento de pasta, mas a pasta deveria se localizar como subpasta de ```/home/```, o que não queria, visto que preparei uma partição especial com 160GB para armazenar dados. Uma solução que funcionou para mim foi:
+1. Instale Samba
+```bash
+sudo apt install samba
+```
 
--
+2. Altere as configurações de leitura/escrita da pasta
+Eu habilitei todas as permissões para a pasta, mas você pode configurar à sua maneira
+Comando usado: 
+```bash
+sudo chmod 777 nome-pasta/
+```
+
+3. Configurando compartilhamento de pasta
+Navete até ao diretório samba, localizado em **/etc/samba**
+
+É recomendado que crie um arquivo cópia de segurança do arquivo **smb.conf**
+
+Abra o arquivo **smb.conf** com seu editor de texto, utilizei o editor Nano
+
+Nas variáveis locais, alterei o Workspace e inseri o netBIOS name com o nome do meu servidor
+```tex
+[global]
+workspace = home
+netbios name = server
+```
+
+Adicionei as seguintes configurações nas linhas abaixo para a minha pasta compartilhada:
+```tex
+[Documentos] # entre chaves será o nome do compartilhamento
+path = /dados/Documentos #dados é a minha partição
+public = yes
+browseable = yes
+writable = yes
+comment = documentos publicos
+printable = no
+read only = no
+guest ok = yes
+creat mask = 0700
+directory mask = 0700
+```
+
+Agora basta reiniciar o sistema:
+```bash
+sudo systemctl restart smbd
+```
+
+### Acessando a pasta compartilhada
+
+#### Windows
+1. Abra o Explorador de arquivos
+2. Acesse Este Computador e selecione Adicionar um local de rede
+3. Insira o IP do seu servidor conectado à mesma rede, e insira também o nome da pasta compartilhada
+> use como input o seguinte padrão: \\xxx.xxx.x.x\nome-pasta
+
+#### Android
+1. Aplicativo
+Instale o aplicativo [Cx Explorador de Arquivos](https://play.google.com/store/apps/details?id=com.cxinventor.file.explorer&hl=pt_BR).
+
+Vá para a rede e clique em Adicionar localização.
+
+Selecione Remoto, Rede Local e em seguida Lançamento Manual.
+
+No lançamento manual, insira o endereço IP do servidor e, se desejar entre com usuário e senha, mas eu prefiro entrar como anônimo.
+
+Pronto, o acesso rápido será salvo na aba REMOTO, e todas as pastas compartilhadas estarão lá.
+
+#### Linux
+
+Ainda não me conectei ao servidor via linux mas, quando fizer, vou atualizar e informar o processo ^-^
+
+### Fixar endereço IP
+Em breve (quando eu conseguir essa proeza via Wireless) anexarei o processo aqui ^-^
