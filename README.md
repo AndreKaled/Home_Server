@@ -63,6 +63,7 @@ sudo apt install samba
 ```
 
 2. Altere as configurações de leitura/escrita da pasta
+
 Eu habilitei todas as permissões para a pasta, mas você pode configurar à sua maneira
 Comando usado: 
 ```bash
@@ -70,7 +71,8 @@ sudo chmod 777 nome-pasta/
 ```
 
 3. Configurando compartilhamento de pasta
-Navete até ao diretório samba, localizado em **/etc/samba**
+
+Navegue até ao diretório samba, localizado em **/etc/samba**
 
 É recomendado que crie um arquivo cópia de segurança do arquivo **smb.conf**
 
