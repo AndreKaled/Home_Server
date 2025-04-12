@@ -7,8 +7,14 @@ Minha ideia original era usar o umbrelOS, mas por algum motivo a iso não se man
 Meu uso do servidor se concentra em **Armazenar arquivos**, **Fazer backups** destes arquivos e também **Hospedar projetos e sites**.
 
 ## Configurações da >minha< máquina
-- CPU Intel 38
+- Fabricante Acer
+- Modelo Aspire 5733
+- CPU Intel(R) Core(TM) i5 M 480 2.67GHz
+- Arquitetura x86_64 
 - 4GB RAM
+- HD 256GB
+- Rede Ethernet Broadcom NetLink BCM57780 (Gigabit)
+- Rede Wireless Qualcomm Atheros AR9485
 
 ## Requisitos
 - 1 Computador que você não se importe em formatá-lo (Desktop ou Laptop)
