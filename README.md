@@ -6,6 +6,10 @@ Minha ideia original era usar o umbrelOS, mas por algum motivo a iso não se man
 
 Meu uso do servidor se concentra em **Armazenar arquivos**, **Fazer backups** destes arquivos e também **Hospedar projetos e sites**.
 
+## Configurações da >minha< máquina
+- CPU Intel 38
+- 4GB RAM
+
 ## Requisitos
 - 1 Computador que você não se importe em formatá-lo (Desktop ou Laptop)
 - 1 unidade de mídia removível (no mínimo 3.0GB)
@@ -130,4 +134,59 @@ Pronto, o acesso rápido será salvo na aba REMOTO, e todas as pastas compartilh
 Ainda não me conectei ao servidor via linux mas, quando fizer, vou atualizar e informar o processo ^-^
 
 ### Fixar endereço IP
-Em breve (quando eu conseguir essa proeza via Wireless) anexarei o processo aqui ^-^
+Fixei via Rede Wireless, abrindo as configurações do roteador.
+> Verifique o endereço IP do roteador e dados de login com seu provedor
+
+Busque por configurações de DHCP, e Alocação de endereço estático, adicione o IP do seu servidor e o endereço MAC.
+
+Salve as configurações e reinicie o servidor.
+
+#### Garantindo IP fixo, mesmo com reset do roteador.
+1. Descubra a sua interface de rede, no caso de wi-fi:
+```bash
+ip link
+```
+
+Geralmente será algo como wlan0 ou wlp3s0.
+
+2. Edite as configurações de netplan:
+```bash
+sudo nano /etc/netplan/01-netcfg.yaml
+```
+
+Este é um exemplo de como deverá ficar as suas configurações:
+
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    wlp3s0:
+      dhcp4: no
+      addresses: [xxx.xxx.x.x/yy]
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [1.1.1.1, 8.8.8.8]
+      access-points:
+        "NomeDaSuaRedeWiFi":
+          password: "senha_wifi"
+
+```
+
+3. Aplique as configs
+```bash
+sudo netplan apply
+```
+
+4. Teste as configurações
+Teste para checar seu ip: 
+
+```bash
+ip a
+```
+
+e teste de ping:
+
+```bash
+ping 8.8.8.8
+``` 
