@@ -190,9 +190,29 @@ Teste para checar seu ip:
 ```bash
 ip a
 ```
-
 e teste de ping:
 
 ```bash
 ping 8.8.8.8
-``` 
+```
+
+### Gerador de pokemon ao abrir terminal
+Já pensou em toda vez que você abrir o terminal, aparecer um pokemon? Vi um projeto no github que gera pokemons aleatórios e os coloca em seu terminal. A única configuração que fiz foi
+gerar o pokemon todas as vezes que abrir o terminal
+
+Faça o gitclone deste [repositório](https://gitlab.com/phoneybadger/pokemon-colorscripts#requirements) e siga com a sua instalação. Lembre-se de testá-lo
+
+Edite o arquivo:
+```bash
+nano ~/.bashrc
+```
+
+Vá para o fim do arquivo e adicione o seguinte campo:
+```txt
+# Executa o Pokémon Colorscripts ao abrir o terminal
+if [ -x "$(command -v pokemon-colorscripts)" ]; then
+    pokemon-colorscripts --random
+fi
+```
+
+Pronto, abra o terminal ou conexão ssh e receba suas boas-vindas! :D
